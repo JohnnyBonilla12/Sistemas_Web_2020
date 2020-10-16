@@ -6,15 +6,56 @@ blogeo.addEventListener('click', function() {
     parametros.append('PrmEmail', e);
     parametros.append('PrmPassword', p);
     //alert(parametros);
-    axios.get("http://localhost/adios")
-        .then(function(response) {
-            console.log(response)
-            console.log("Contenido" + response.data)
-            console.log("Estatus" + response.status)
-            document.getElementById('titulo').innerHTML = response.data
-        })
-        .catch(function(error) {
-          console.log(error)
-        })
+
+    // axios.get("http://localhost/hola?" + parametros)
+    //     .then(function(response) {
+    //         console.log(response)
+    //         console.log("Contenido" + response.data)
+    //         console.log("Estatus" + response.status)
+    //         document.getElementById('titulo').innerHTML = response.data
+    //     })
+    //     .catch(function(error) {
+    //       console.log(error)
+    //     })
+        
     //alert('Evento boton: ' + document.getElementById('password').value);
+    // axios.post("http://localhost/adios?" + parametros)
+    // .then(function(response) {
+    //     console.log(response)
+    //     console.log("Contenido" + response.data)
+    //     console.log("Estatus" + response.status)
+    //     document.getElementById('titulo').innerHTML = response.data
+    // })
+    // .catch(function(error) {
+    //   console.log(error)
+    // })
+
+    //Se hace la peticion POST como JSON
+    // axios.post("http://localhost/adios" , {
+    //   PrmEmail: e,
+    //   PrmPassword: p
+    // })
+    // .then(function(response) {
+    //     console.log(response)
+    //     console.log("Contenido" + response.data)
+    //     console.log("Estatus" + response.status)
+    //     document.getElementById('titulo').innerHTML = response.data
+    // })
+    // .catch(function(error) {
+    //   console.log(error)
+    // })
+
+   axios.post("http://localhost/adiosJson" , {
+      PrmEmail: e,
+      PrmPassword: p
+    })
+    .then(function(response) {
+        console.log(response)
+        console.log("Contenido" + response.data)
+        console.log("Estatus" + response.status)
+        document.getElementById('titulo').innerHTML = response.data
+    })
+    .catch(function(error) {
+      console.log(error)
+    })
 });
