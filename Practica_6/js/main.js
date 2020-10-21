@@ -45,17 +45,31 @@ blogeo.addEventListener('click', function() {
     //   console.log(error)
     // })
 
-   axios.post("http://localhost/adiosJson" , {
-      PrmEmail: e,
-      PrmPassword: p
-    })
-    .then(function(response) {
-        console.log(response)
-        console.log("Contenido" + response.data)
-        console.log("Estatus" + response.status)
-        document.getElementById('titulo').innerHTML = response.data
-    })
-    .catch(function(error) {
-      console.log(error)
-    })
+  //  axios.post("http://localhost/adiosJson" , {
+  //     PrmEmail: e,
+  //     PrmPassword: p
+  //   })
+  //   .then(function(response) {
+  //       console.log(response)
+  //       console.log("Contenido" + response.data)
+  //       console.log("Estatus" + response.status)
+  //       document.getElementById('titulo').innerHTML = response.data
+  //   })
+  //   .catch(function(error) {
+  //     console.log(error)
+  //   })
+
+  axios.post("http://localhost:4567/usuarios", {
+        PrtEmail : document.getElementById('email').value,
+        PrtPassword : document.getElementById('password').value
+  })
+    .then(function (response) {
+        console.log(response)
+        console.log(response.data)
+        console.log(response.statusText)
+        document.getElementById('titulo').innerHTML = response.data
+    })
+    .catch(function (error) {
+        console.log(error)
+    })
 });
