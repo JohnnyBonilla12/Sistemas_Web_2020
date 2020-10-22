@@ -2,14 +2,14 @@ package mx.uv.basededatos;
 
 import static spark.Spark.*;
 import com.google.gson.Gson;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+//import java.util.HashMap;
+//import java.util.Map;
+//import java.util.UUID;
 
-public class App 
+public class AppDB
 {
     private static Gson gson = new Gson();
-    private static Map<String, Usuarios> usuarios = new HashMap<>();
+    //private static Map<String, Usuarios> usuarios = new HashMap<>();
 
     public static void main( String[] args )
     {
@@ -29,17 +29,17 @@ public class App
         before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
 
 
-        get("/usuarios", (req, res) -> gson.toJson(usuarios.values() ));
+        get("/usuarios", (req, res) -> gson.toJson(DAO.dameUsuarios()));
 
-        post("/usuarios", (req, res) -> {
-            String query = req.body();
-            System.out.println( "Peticion: " + query);
-            Usuarios u = gson.fromJson(query, Usuarios.class);
-            String id = UUID.randomUUID().toString();
-            u.setID(id);
-            usuarios.put(id, u);
-            return "Se creo el Usuario con ID: " + id;
-        });
+        // post("/usuarios", (req, res) -> {
+        //     String query = req.body();
+        //     System.out.println( "Peticion: " + query);
+        //     Usuarios u = gson.fromJson(query, Usuarios.class);
+        //     String id = UUID.randomUUID().toString();
+        //     u.setID(id);
+        //     usuarios.put(id, u);
+        //     return "Se creo el Usuario con ID: " + id;
+        // });
 
         System.out.println( "Hello World!" );
     }
