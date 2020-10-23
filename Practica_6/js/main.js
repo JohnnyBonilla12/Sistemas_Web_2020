@@ -60,8 +60,8 @@ blogeo.addEventListener('click', function() {
   //   })
 
   axios.post("http://localhost:4567/usuarios", {
-        PrtEmail : document.getElementById('email').value,
-        PrtPassword : document.getElementById('password').value
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value
   })
     .then(function (response) {
         console.log(response)

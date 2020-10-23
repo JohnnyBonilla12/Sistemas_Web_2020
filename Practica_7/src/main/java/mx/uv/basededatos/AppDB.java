@@ -1,10 +1,12 @@
 package mx.uv.basededatos;
 
 import static spark.Spark.*;
+
+
 import com.google.gson.Gson;
 //import java.util.HashMap;
 //import java.util.Map;
-//import java.util.UUID;
+import java.util.UUID;
 
 public class AppDB
 {
@@ -31,15 +33,14 @@ public class AppDB
 
         get("/usuarios", (req, res) -> gson.toJson(DAO.dameUsuarios()));
 
-        // post("/usuarios", (req, res) -> {
-        //     String query = req.body();
-        //     System.out.println( "Peticion: " + query);
-        //     Usuarios u = gson.fromJson(query, Usuarios.class);
-        //     String id = UUID.randomUUID().toString();
-        //     u.setID(id);
-        //     usuarios.put(id, u);
-        //     return "Se creo el Usuario con ID: " + id;
-        // });
+        post("/usuarios", (req, res) -> {
+            String query = req.body();
+            System.out.println( "Peticion: " + query);
+            Usuarios u = gson.fromJson(query, Usuarios.class);
+            String id = UUID.randomUUID().toString();
+            u.setID(id);
+            return DAO.crearUsuarios(u);
+        });
 
         System.out.println( "Hello World!" );
     }

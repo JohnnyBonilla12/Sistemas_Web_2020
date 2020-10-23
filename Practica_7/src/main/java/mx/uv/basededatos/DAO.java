@@ -1,6 +1,7 @@
 package mx.uv.basededatos;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -53,5 +54,54 @@ public class DAO {
             }
         }
         return resultado;
+    }
+
+    public static String crearUsuarios(Usuarios usuario){
+        PreparedStatement stm = null;
+        Connection con = null;
+        ResultSet rs = null;
+        String mensaje = "";
+
+        con = conexion.getConexion();
+
+        try {
+            String sql = "INSERT INTO USUARIOS (id, email, password) VALUES (?, ?, ?)";
+            stm = con.prepareStatement(sql);
+            stm.setString(1, usuario.getId());
+            stm.setString(2, usuario.getEmail());
+            stm.setString(3, usuario.getPassword());
+
+            if(stm.executeUpdate() > 0){
+                mensaje = "El Usuario se agregó correctamente";
+            } else{
+                mensaje = "No se pudo crear al Usuario";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally{
+            if(rs != null){
+                try{
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                rs = null;
+            }
+            if(stm != null){
+                try {
+                    stm.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                stm = null;
+            }
+            try {
+                con.close();
+                System.out.println("Closed Connection");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return mensaje;
     }
 }
